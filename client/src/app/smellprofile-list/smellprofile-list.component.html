@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">Smellmap Entries</div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Lon/Lat</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="list-table">
+              <tr *ngFor='let smellprofile of smellList'
+              [class.selected]="smellprofile === selectedSmellprofile"
+              (click)="onSelect(smellprofile)">
+                <td>{{ smellprofile._id }}</td>
+                <td>{{ smellprofile.name }}</td>
+                <td>{{ smellprofile.long }}, {{ smellprofile.lat }}</td>
+                <td>{{ smellprofile.type }}</td>
+                <td>{{ smellprofile.desc }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-smellprofile-map [smellprofile]="selectedSmellprofile"></app-smellprofile-map>
