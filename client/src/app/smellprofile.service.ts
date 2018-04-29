@@ -18,4 +18,9 @@ export class SmellprofileService {
   listSmells() {
     return this.http.get(this.apiurl);
   }
+
+  // Get a single smell
+  getSmell(id:string) {
+    return this.http.get(this.apiurl + id);
+  }
 }
