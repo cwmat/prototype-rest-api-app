@@ -13,9 +13,7 @@ http://67.205.177.107:8085
 The description of this assignment can be found in Canvas at [Assignment #7](https://canvas.harvard.edu/courses/35096/assignments/208557) (Spring 2018)
 
 ## Description of Project
-The webpage hows a list view pulling from a mock data service.  Each attribute of the data are shown in columns of the main table.  THis is accomplished via the Angular ngFor directive.  Class binding is used to change the color of hover/selected rows.  
-
-Upon clicking a row, the list component will pass data to the map component whcih listensd for changes, clears the current mapview (if markers exist) and adds a marker using the clicked feature's lat/long value.
+TODO
 
 
 ## Structure
