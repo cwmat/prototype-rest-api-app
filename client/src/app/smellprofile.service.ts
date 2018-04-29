@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
 import { Smellprofile } from './smellprofile';
 import { SMELLPROFILES } from './mock-data';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class SmellprofileService {
+  private apiurl = environment.apiurl;
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
   // List all smells
-  listSmells(): Observable<Smellprofile[]> {
-    // Return observable to get data asynchronously.
-    return of(SMELLPROFILES);
+  listSmells() {
+    return this.http.get(this.apiurl);
   }
 }
