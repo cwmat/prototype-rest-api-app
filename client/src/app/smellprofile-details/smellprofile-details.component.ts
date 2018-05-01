@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // Import data service and data class
 import { SmellprofileService } from '../smellprofile.service';
@@ -12,9 +12,12 @@ import { Smellprofile } from '../smellprofile';
   providers: [SmellprofileService]
 })
 export class SmellprofileDetailsComponent implements OnInit {
+  newSmell;
   smellprofile;
 
-  constructor(private route: ActivatedRoute, private smellprofileService:SmellprofileService) { }
+  constructor(private route: ActivatedRoute,
+              private smellprofileService:SmellprofileService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getSmell();
@@ -25,5 +28,23 @@ export class SmellprofileDetailsComponent implements OnInit {
     this.smellprofileService.getSmell(param)
       .subscribe(smellprofile => this.smellprofile = smellprofile[0]);
   }
+
+  goBack():void {
+    // do some logic here if we like
+     
+    // navigate back to gallery
+    this.router.navigate(['/gallery']);
+    }
+  
+    createSmell() : void {
+      let data;
+      this.smellprofileService.createSmell(data)
+      .subscribe((photo)=>{
+        console.log(photo)
+        this.newPhoto.emit();
+        newphotoForm.reset();
+        this.fileInputField.value="";
+      });
+    }
 
 }

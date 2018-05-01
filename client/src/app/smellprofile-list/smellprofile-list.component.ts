@@ -12,7 +12,7 @@ import { Smellprofile } from '../smellprofile';
 })
 export class SmellprofileListComponent implements OnInit {
   // Define properties for holding data from data service
-  smellList: Smellprofile[];
+  smellList: any;
   selectedSmellprofile: Smellprofile;
 
   // Inject data service in constructor

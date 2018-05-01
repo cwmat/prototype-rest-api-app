@@ -23,4 +23,19 @@ export class SmellprofileService {
   getSmell(id:string) {
     return this.http.get(this.apiurl + id);
   }
+
+  // Create
+  createSmell(smell: JSON){
+    return this.http.post(this.apiurl, smell);
+  }
+
+  // Update
+  updateSmell(id, data){
+      return this.http.put(this.apiurl + id, data);
+  }
+
+  // Delete
+  deleteSmell(id){
+    return this.http.delete(this.apiurl + id);
+  }
 }
