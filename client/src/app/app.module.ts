@@ -10,6 +10,7 @@ import { SmellprofileListComponent } from './smellprofile-list/smellprofile-list
 import { SmellprofileMapComponent } from './smellprofile-map/smellprofile-map.component';
 import { SmellprofileDetailsComponent } from './smellprofile-details/smellprofile-details.component';
 import { SmellprofileGalleryComponent } from './smellprofile-gallery/smellprofile-gallery.component';
+import { SmellprofileNewComponent } from './smellprofile-new/smellprofile-new.component';
 
 // import { AgmCoreModule } from '@agm/core';
 
@@ -25,7 +26,8 @@ const routes:Routes = [
     SmellprofileListComponent,
     SmellprofileMapComponent,
     SmellprofileDetailsComponent,
-    SmellprofileGalleryComponent
+    SmellprofileGalleryComponent,
+    SmellprofileNewComponent
   ],
   imports: [
     BrowserModule,

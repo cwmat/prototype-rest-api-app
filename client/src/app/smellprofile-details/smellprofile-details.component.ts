@@ -12,7 +12,6 @@ import { Smellprofile } from '../smellprofile';
   providers: [SmellprofileService]
 })
 export class SmellprofileDetailsComponent implements OnInit {
-  newSmell;
   smellprofile;
 
   constructor(private route: ActivatedRoute,
@@ -36,15 +35,5 @@ export class SmellprofileDetailsComponent implements OnInit {
     this.router.navigate(['/gallery']);
     }
   
-    createSmell() : void {
-      let data;
-      this.smellprofileService.createSmell(data)
-      .subscribe((photo)=>{
-        console.log(photo)
-        this.newPhoto.emit();
-        newphotoForm.reset();
-        this.fileInputField.value="";
-      });
-    }
 
 }
