@@ -28,6 +28,19 @@ export class SmellprofileDetailsComponent implements OnInit {
       .subscribe(smellprofile => this.smellprofile = smellprofile[0]);
   }
 
+  // calls update from SmellprofileService using data passed from ngForm.value
+  updateSmell(data : any) : void {
+    this.smellprofile.name = data.name;
+    this.smellprofile.type = data.type;
+    this.smellprofile.desc = data.desc;
+    this.smellprofile.lat = data.lat;
+    this.smellprofile.lon = data.long;
+    this.smellprofileService.updateSmell(this.smellprofile._id, this.smellprofile)
+      .subscribe((result)=>{
+        location.reload();
+    });
+  }
+
   // deletes photo using PhotoService
   deleteSmell(){
     if (confirm(`Are you sure you want to delete ${this.smellprofile.desc}?`)){
