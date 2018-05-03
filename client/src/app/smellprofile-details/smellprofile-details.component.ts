@@ -28,6 +28,18 @@ export class SmellprofileDetailsComponent implements OnInit {
       .subscribe(smellprofile => this.smellprofile = smellprofile[0]);
   }
 
+  // deletes photo using PhotoService
+  deleteSmell(){
+    if (confirm(`Are you sure you want to delete ${this.smellprofile.desc}?`)){
+      console.log(`deleting ${this.smellprofile._id}`);
+      this.smellprofileService.deleteSmell(this.smellprofile._id)
+        .subscribe((result)=>{
+          alert(`Smellprofile ${this.smellprofile.desc} has been deleted`);
+          this.router.navigate(['/gallery']);
+        })
+      }
+  }
+
   goBack():void {
     // do some logic here if we like
      
