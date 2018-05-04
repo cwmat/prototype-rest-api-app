@@ -13,6 +13,7 @@ import { Smellprofile } from '../smellprofile';
 })
 export class SmellprofileDetailsComponent implements OnInit {
   smellprofile;
+  updateProfile: any = {};
 
   constructor(private route: ActivatedRoute,
               private smellprofileService:SmellprofileService,
@@ -30,12 +31,12 @@ export class SmellprofileDetailsComponent implements OnInit {
 
   // calls update from SmellprofileService using data passed from ngForm.value
   updateSmell(data : any) : void {
-    this.smellprofile.name = data.name;
-    this.smellprofile.type = data.type;
-    this.smellprofile.desc = data.desc;
-    this.smellprofile.lat = data.lat;
-    this.smellprofile.lon = data.long;
-    this.smellprofileService.updateSmell(this.smellprofile._id, this.smellprofile)
+    this.updateProfile.name = data.name;
+    this.updateProfile.type = data.type;
+    this.updateProfile.desc = data.desc;
+    this.updateProfile.lat = data.lat;
+    this.updateProfile.lon = data.lon;
+    this.smellprofileService.updateSmell(this.smellprofile._id, this.updateProfile)
       .subscribe((result)=>{
         location.reload();
     });
