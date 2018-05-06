@@ -52,7 +52,16 @@ relevant to your site - information about people, pictures, sports teams, univer
 
 
 ## TODO
-- Implement HTTP access via data service
-- Add route views (envisioning a couple tabs that lets the user switch between CRUD views and the map)
-- Add forms for CRUD
-- Add mapping view
+X Implement HTTP access via data service
+X Add route views (envisioning a couple tabs that lets the user switch between CRUD views and the map)
+X Add forms for CRUD
+X Add mapping view
+
+- Add map refresh (might need to encapuslate in a function)
+- Add create map view and refresh
+  - figure out how to derive lat/long from click and pass to other functions
+- Add update view map and refresh function (on state change)
+- Figure out why update is not self populating
+- Final tweaks
+- Clean up comments/code/format
+
