@@ -5,3 +5,11 @@ starter {
 btn-secondary {
   margin-left: 1em;
 }
+
+tbody tr:hover {
+  color: rgb(241, 95, 210);
+}
+
+tbody tr.selected {
+  color: rgb(198, 240, 49);
+}

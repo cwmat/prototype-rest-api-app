@@ -1,7 +1,8 @@
+<!-- State change buttons -->
 <div class="row starter" style="margin-top: 5em;">
-    <div class="col-lg-12 text-center starter">
-  <button class="btn" [class.btn-primary]="viewState == 'Details'" (click)="changeViewState('Details')">Details View</button>
-  <button class="btn" [class.btn-primary]="viewState == 'Update'" (click)="changeViewState('Update')">Update View</button>
+  <div class="col-lg-12 text-center starter">
+    <button class="btn" [class.btn-primary]="viewState == 'Details'" (click)="changeViewState('Details')">Details View</button>
+    <button class="btn" [class.btn-primary]="viewState == 'Update'" (click)="changeViewState('Update')">Update View</button>
   </div>
 </div>
 
@@ -9,20 +10,64 @@
 <div class="row" *ngIf="viewState == 'Details'">
   <div class="col-lg-12 text-center">
     <h1 class="mt-5">Smellprofile Details</h1>
-    <p>{{ smellprofile._id }}</p>
-    <p>{{ smellprofile.name }}</p>
-    <p>{{ smellprofile.type }}</p>
-    <p>{{ smellprofile.desc }}</p>
-    <a class="btn btn-link" (click)="goBack()">back to gallery</a>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody id="list-table">
+          <tr [class.selected]="smellprofile === selectedSmellprofile">
+            <td>ID</td>
+            <td>{{ smellprofile._id }}</td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td>{{ smellprofile.name }}</td>
+          </tr>
+          <tr>
+            <td>Long/Lat</td>
+            <td>{{ smellprofile.long }}, {{ smellprofile.lat }}</td>
+          </tr>
+          <tr>
+            <td>Type</td>
+            <td>{{ smellprofile.type }}</td>
+          </tr>
+          <tr>
+            <td>Description</td>
+            <td>{{ smellprofile.desc }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Map -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div #Detailsgmap style="height: 300px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Buttons -->
+    <div class="row" style="margin-top: 1em;">
+      <div class="col-lg-12">
+        <button class="btn btn-danger" type="button" (click)="deleteSmell()">Delete This Smell</button>
+        <button class="btn btn-warning" style="margin-left: 1em;" type="button" (click)="goBack()">Back to Gallery</button>
+      </div>
+    </div>
+    <!-- End Col -->
   </div>
-  <button class="btn btn-danger" type="button" (click)="deleteSmell()">Delete This Smell</button>
-  <button class="btn btn-warning" style="margin-left: 1em;" type="button" (click)="goBack()">Back to Gallery</button>
-</div>
 
 
-
-<!-- Update -->
-<div class="row" *ngIf="viewState == 'Update'">
+  <!-- Update -->
+  <div class="row" *ngIf="viewState == 'Update'">
     <div class="col-lg-12">
       <h1 class="mt-5 starter">Update Data</h1>
       <div id="page-wrapper">
@@ -33,23 +78,26 @@
                 <div class="panel-body">
                   <div class="row">
                     <div class="col-lg-12 page-wrapper">
-                        <form #newSmellForm="ngForm" (ngSubmit)="updateSmell(newSmellForm.value)">
+                      <form #newSmellForm="ngForm" (ngSubmit)="updateSmell(newSmellForm.value)">
                         <div class="form-group">
                           <label>Name</label>
-                          <input required [ngModel] #name placeholder="Enter text" name="name" class="form-control" value="{{ smellprofile.name }}" />
+                          <input required [ngModel] #name placeholder="Enter text" name="name" class="form-control" value="{{ smellprofile.name }}"
+                          />
                           <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">Field is required</div>
                         </div>
                         <div class="col-lg-6">
                           <div class="form-group">
                             <label>Longitude</label>
-                            <input required type="number" #long [ngModel] placeholder="Enter text" name="lon" class="form-control" value="{{ smellprofile.long }}" />
+                            <input required type="number" #long [ngModel] placeholder="Enter text" name="lon" class="form-control" value="{{ smellprofile.long }}"
+                            />
                             <div *ngIf="long.invalid && (long.dirty || long.touched)" class="alert alert-danger">Field is required and must be numeric</div>
                           </div>
                         </div>
                         <div class="col-lg-6">
                           <div class="form-group">
                             <label>Latitude</label>
-                            <input required type="number" #lat [ngModel] placeholder="Enter text" name="lat" class="form-control" value="{{ smellprofile.lat }}" />
+                            <input required type="number" #lat [ngModel] placeholder="Enter text" name="lat" class="form-control" value="{{ smellprofile.lat }}"
+                            />
                             <div *ngIf="lat.invalid && (lat.dirty || lat.touched)" class="alert alert-danger">Field is required and must be numeric</div>
                           </div>
                         </div>

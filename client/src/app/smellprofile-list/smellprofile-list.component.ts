@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // Import data service and data class
 import { SmellprofileService } from '../smellprofile.service';
@@ -16,7 +17,8 @@ export class SmellprofileListComponent implements OnInit {
   selectedSmellprofile: Smellprofile;
 
   // Inject data service in constructor
-  constructor(private smellprofileService:SmellprofileService) { }
+  constructor(private smellprofileService:SmellprofileService, 
+              private router: Router) { }
 
   // On init, call the getSmells() method to obtain data from dataservice
   ngOnInit() {
@@ -38,5 +40,6 @@ export class SmellprofileListComponent implements OnInit {
    */
   onSelect(smellprofile:Smellprofile): void {
     this.selectedSmellprofile = smellprofile;
+    this.router.navigate(['/smell/' + this.selectedSmellprofile._id]);
   }
 }
