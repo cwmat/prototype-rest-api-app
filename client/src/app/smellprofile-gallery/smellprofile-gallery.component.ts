@@ -9,7 +9,7 @@ import { SmellprofileListComponent } from "../smellprofile-list/smellprofile-lis
 })
 export class SmellprofileGalleryComponent implements OnInit {
   @ViewChild(SmellprofileListComponent ) child: SmellprofileListComponent; 
-
+  viewState: String = 'Map';
 
   constructor() { }
 
@@ -18,6 +18,11 @@ export class SmellprofileGalleryComponent implements OnInit {
 
   updateSmells() {
     this.child.getSmells();
+    this.changeViewState('Map');
+  }
+
+  changeViewState(newState): void {
+    this.viewState = newState;
   }
 
 }

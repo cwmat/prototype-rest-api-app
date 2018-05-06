@@ -14,6 +14,7 @@ import { Smellprofile } from '../smellprofile';
 export class SmellprofileDetailsComponent implements OnInit {
   smellprofile;
   updateProfile: any = {};
+  viewState: String = "Details";
 
   constructor(private route: ActivatedRoute,
               private smellprofileService:SmellprofileService,
@@ -60,6 +61,10 @@ export class SmellprofileDetailsComponent implements OnInit {
     // navigate back to gallery
     this.router.navigate(['/gallery']);
     }
+  
+  changeViewState(newState): void {
+    this.viewState = newState;
+  }
   
 
 }
