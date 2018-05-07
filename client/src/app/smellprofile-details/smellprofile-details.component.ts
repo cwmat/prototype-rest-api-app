@@ -1,12 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router
+} from '@angular/router';
 
 // Import data service and data class
-import { SmellprofileService } from '../smellprofile.service';
-import { Smellprofile } from '../smellprofile';
+import {
+  SmellprofileService
+} from '../smellprofile.service';
+import {
+  Smellprofile
+} from '../smellprofile';
 
 // Import Google Map TS types
-import { } from '@types/googlemaps';
+import {} from '@types/googlemaps';
 
 @Component({
   selector: 'app-smellprofile-details',
@@ -22,18 +33,67 @@ export class SmellprofileDetailsComponent implements OnInit {
   viewState: String = "Details";
 
   constructor(private route: ActivatedRoute,
-              private smellprofileService:SmellprofileService,
-              private router: Router) { }
+    private smellprofileService: SmellprofileService,
+    private router: Router) {}
 
   ngOnInit() {
     this.getSmell();
 
-    
+
 
     // this.addMarkers();
   }
 
   ngAfterViewInit() {
+    this.refreshMap();
+  }
+
+  getSmell(): void {
+    const param = this.route.snapshot.paramMap.get('id');
+    this.smellprofileService.getSmell(param)
+      .subscribe(smellprofile => this.smellprofile = smellprofile[0]);
+  }
+
+  // calls update from SmellprofileService using data passed from ngForm.value
+  updateSmell(data: any): void {
+    this.updateProfile.name = data.name;
+    this.updateProfile.type = data.type;
+    this.updateProfile.desc = data.desc;
+    this.updateProfile.lat = data.lat;
+    this.updateProfile.lon = data.lon;
+    this.smellprofileService.updateSmell(this.smellprofile._id, this.updateProfile)
+      .subscribe((result) => {
+        location.reload();
+      });
+  }
+
+  // deletes photo using PhotoService
+  deleteSmell() {
+    if (confirm(`Are you sure you want to delete ${this.smellprofile.desc}?`)) {
+      console.log(`deleting ${this.smellprofile._id}`);
+      this.smellprofileService.deleteSmell(this.smellprofile._id)
+        .subscribe((result) => {
+          alert(`Smellprofile ${this.smellprofile.desc} has been deleted`);
+          this.router.navigate(['/gallery']);
+        })
+    }
+  }
+
+  goBack(): void {
+    // navigate back to gallery
+    this.router.navigate(['/gallery']);
+  }
+
+  changeViewState(newState): void {
+    this.viewState = newState;
+    if (this.viewState == 'Details') {
+      // setTimeout(this.refreshMap(), 3000);
+      location.reload();
+      // this.refreshMap();
+    }
+  }
+
+  refreshMap(): void {
     console.log("INIT!");
     // Rough center point for Richmond, VA
     var rva = {
@@ -48,53 +108,19 @@ export class SmellprofileDetailsComponent implements OnInit {
     });
 
     let marker = new google.maps.Marker({
-      position: {lat: this.smellprofile.lat, lng: this.smellprofile.long},
+      position: {
+        lat: this.smellprofile.lat,
+        lng: this.smellprofile.long
+      },
       map: this.map,
       title: this.smellprofile.desc
     });
 
-    this.map.setCenter({lat: this.smellprofile.lat, lng: this.smellprofile.long});
-  }
-
-  getSmell() : void {
-    const param = this.route.snapshot.paramMap.get('id');
-    this.smellprofileService.getSmell(param)
-      .subscribe(smellprofile => this.smellprofile = smellprofile[0]);
-  }
-
-  // calls update from SmellprofileService using data passed from ngForm.value
-  updateSmell(data : any) : void {
-    this.updateProfile.name = data.name;
-    this.updateProfile.type = data.type;
-    this.updateProfile.desc = data.desc;
-    this.updateProfile.lat = data.lat;
-    this.updateProfile.lon = data.lon;
-    this.smellprofileService.updateSmell(this.smellprofile._id, this.updateProfile)
-      .subscribe((result)=>{
-        location.reload();
+    this.map.setCenter({
+      lat: this.smellprofile.lat,
+      lng: this.smellprofile.long
     });
   }
 
-  // deletes photo using PhotoService
-  deleteSmell(){
-    if (confirm(`Are you sure you want to delete ${this.smellprofile.desc}?`)){
-      console.log(`deleting ${this.smellprofile._id}`);
-      this.smellprofileService.deleteSmell(this.smellprofile._id)
-        .subscribe((result)=>{
-          alert(`Smellprofile ${this.smellprofile.desc} has been deleted`);
-          this.router.navigate(['/gallery']);
-        })
-      }
-  }
-
-  goBack():void {
-    // navigate back to gallery
-    this.router.navigate(['/gallery']);
-    }
-  
-  changeViewState(newState): void {
-    this.viewState = newState;
-  }
-  
 
 }
