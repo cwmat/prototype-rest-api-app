@@ -9,8 +9,6 @@ var flash = require('connect-flash');
 var mongoose = require('mongoose');
 require('dotenv').config();
 
-var indexRoute = require('./routes/index');
-var aboutRoute = require('./routes/about');
 var apismellmap = require('./routes/api/api-smellmap')
 
 // Create Express application
@@ -41,8 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/data')));
 
 // Routes
-app.use('/', indexRoute);
-app.use('/about', aboutRoute);
+app.use('/', express.static('../client/dist'));
 app.use('/api/smellmap', apismellmap);
 
 // Catch 404 and forward to error handler

@@ -3,4 +3,4 @@
 Charles Mateer cmateer@g.harvard.edu
 
 # Summary
-TODO
+REST API and webs erver for Smellmap.  See root project for full description.
