@@ -1,0 +1,74 @@
+<!-- Update -->
+<div class="row">
+    <!-- <div class="row"> -->
+  <div class="col-lg-12">
+    <h1 class="mt-5 starter">Update Data</h1>
+    <div id="page-wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="container">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-lg-12 page-wrapper">
+                    <form #newSmellForm="ngForm" (ngSubmit)="updateSmell(newSmellForm)">
+                      <div class="form-group">
+                        <label>Name</label>
+                        <input required ([ngModel])="smellprofile.name" #name placeholder="Enter text" name="name" class="form-control" value="{{ smellprofile.name }}" />
+                        <!-- <div *ngIf="name.invalid" class="alert alert-danger">Field is required</div> -->
+                      </div>
+
+                      <!-- Map -->
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="panel panel-default">
+                            <div class="panel-body">
+                              <div #Updategmap style="height: 300px;"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>Longitude</label>
+                          <input required ([ngModel])="smellprofile.long" type="number" #long placeholder="Enter text" name="lon" class="form-control" value="{{ smellprofile.long }}"
+                          />
+                          <!-- <div *ngIf="long.invalid" class="alert alert-danger">Field is required and must be numeric</div> -->
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>Latitude</label>
+                          <input required ([ngModel])="smellprofile.lat" type="number" #lat placeholder="Enter text" name="lat" class="form-control" value="{{ smellprofile.lat }}"
+                          />
+                          <!-- <div *ngIf="lat.invalid" class="alert alert-danger">Field is required and must be numeric</div> -->
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Type</label>
+                        <select required ([ngModel])="smellprofile.type" #type name="type" class="form-control">
+                          <option [selected]="smellprofile.type == 'Good'">Good</option>
+                          <option [selected]="smellprofile.type == 'Neutral'">Neutral</option>
+                          <option [selected]="smellprofile.type == 'Bad'">Bad</option>
+                        </select>
+                        <!-- <div *ngIf="type.invalid" class="alert alert-danger">Field is required</div> -->
+                      </div>
+                      <div class="form-group">
+                        <label>Description</label>
+                        <textarea required ([ngModel])="smellprofile.desc" #desc rows="3" name="desc" class="form-control" value="{{ smellprofile.desc }}">{{ smellprofile.desc }}</textarea>
+                        <!-- <div *ngIf="desc.invalid" class="alert alert-danger">Field is required</div> -->
+                      </div>
+                      <button type="submit" class="btn btn-default" [disabled]="!newSmellForm.valid">Submit</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
