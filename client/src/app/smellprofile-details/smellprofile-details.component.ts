@@ -26,14 +26,12 @@ import {} from '@types/googlemaps';
   providers: [SmellprofileService]
 })
 export class SmellprofileDetailsComponent implements OnInit {
+  // Google map instance members
   @ViewChild('Detailsgmap') detailsGmapElement: any;
   map: google.maps.Map;
-  @ViewChild('Updategmap') updateGmapElement: any;
-  // uMap: google.maps.Map;
-  // updateMarker;
+  // Data isntance member
   smellprofile;
-  // updateSmellprofile;
-  // updateProfile: any = {};
+  // State change instance member
   viewState: String = "Details";
 
   constructor(private route: ActivatedRoute,
@@ -41,19 +39,17 @@ export class SmellprofileDetailsComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit() {
+    // Find the specified Smell
     this.getSmell();
-    // this.refreshMap();
-
-
-    // this.addMarkers();
   }
 
   ngAfterViewInit() {
+    // Draw the map after the DOM has rendered
     this.refreshMap();
-    // this.updateMap();
   }
 
   getSmell(): void {
+    // Use data service to find a specific smell
     const param = this.route.snapshot.paramMap.get('id');
     this.smellprofileService.getSmell(param)
       .subscribe(smellprofile => {
@@ -61,20 +57,7 @@ export class SmellprofileDetailsComponent implements OnInit {
       });
   }
 
-  // calls update from SmellprofileService using data passed from ngForm.value
-  // updateSmell(data: any): void {
-  //   this.updateProfile.name = data.name;
-  //   this.updateProfile.type = data.type;
-  //   this.updateProfile.desc = data.desc;
-  //   this.updateProfile.lat = data.lat;
-  //   this.updateProfile.lon = data.lon;
-  //   this.smellprofileService.updateSmell(this.smellprofile._id, this.updateProfile)
-  //     .subscribe((result) => {
-  //       location.reload();
-  //     });
-  // }
-
-  // deletes photo using PhotoService
+  // Deletes smell using data Service
   deleteSmell() {
     if (confirm(`Are you sure you want to delete ${this.smellprofile.desc}?`)) {
       console.log(`deleting ${this.smellprofile._id}`);
@@ -87,18 +70,16 @@ export class SmellprofileDetailsComponent implements OnInit {
   }
 
   goBack(): void {
-    // navigate back to gallery
+    // Navigate back to gallery
     this.router.navigate(['/gallery']);
   }
 
+  // Change the view state between 'Details' and 'Update'
   changeViewState(newState): void {
     this.viewState = newState;
 
     if (this.viewState == 'Details') {
-      // setTimeout(this.refreshMap(), 3000);
       location.reload();
-      // this.refreshMap();
-      // this.updateMap();
     }
   }
 
@@ -116,6 +97,7 @@ export class SmellprofileDetailsComponent implements OnInit {
       center: rva
     });
 
+    // Set a marker
     let marker = new google.maps.Marker({
       position: {
         lat: this.smellprofile.lat,
@@ -125,84 +107,10 @@ export class SmellprofileDetailsComponent implements OnInit {
       title: this.smellprofile.desc
     });
 
+    // Cetner map
     this.map.setCenter({
       lat: this.smellprofile.lat,
       lng: this.smellprofile.long
     });
   }
-
-  // updateMap(): void {
-  //   console.log("INIT!");
-  //   // Rough center point for Richmond, VA
-  //   var rva = {
-  //     lat: 37.536954951447285,
-  //     lng: -77.43867874145508
-  //   };
-
-  //   // Define a GMap
-  //   this.uMap = new google.maps.Map(this.updateGmapElement.nativeElement, {
-  //     zoom: 12,
-  //     center: rva
-  //   });
-
-  //   this.updateMarker = new google.maps.Marker({
-  //     position: {
-  //       lat: this.smellprofile.lat,
-  //       lng: this.smellprofile.long
-  //     },
-  //     map: this.uMap,
-  //     title: this.smellprofile.desc
-  //   });
-
-  //   this.uMap.setCenter({
-  //     lat: this.smellprofile.lat,
-  //     lng: this.smellprofile.long
-  //   });
-
-  //   google.maps.event.addListener(this.map, 'click', (event) => {
-  //     this.updateProfile.lat = event.latLng.lat();
-  //     this.updateProfile.long = event.latLng.lng();
-      
-  //     if (this.updateMarker) {
-  //       this.updateMarker.setMap(null);
-  //     }
-
-  //     this.updateMarker = new google.maps.Marker({
-  //       position: {
-  //         lat: this.updateProfile.lat,
-  //         lng: this.updateProfile.long
-  //       },
-  //       map: this.map
-  //       // title: this.newSmell.desc
-  //     });
-  
-  //     this.map.setCenter({
-  //       lat: this.updateProfile.lat,
-  //       lng: this.updateProfile.long
-  //     });
-  //   });
-  // }
-
-  // mapClick(event): any {
-  //   this.updateProfile.lat = event.latLng.lat();
-  //   this.updateProfile.long = event.latLng.lng();
-  //   let marker = new google.maps.Marker({
-  //     position: {
-  //       lat: this.updateProfile.lat,
-  //       lng: this.updateProfile.long
-  //     },
-  //     map: this.map
-  //     // title: this.newSmell.desc
-  //   });
-
-  //   this.map.setCenter({
-  //     lat: this.updateProfile.lat,
-  //     lng: this.updateProfile.long
-  //   });
-
-  //   console.log(this.updateProfile.lat, this.updateProfile.long);
-
-  // }
-
-
 }

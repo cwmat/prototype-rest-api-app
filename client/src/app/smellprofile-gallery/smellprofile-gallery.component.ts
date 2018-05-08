@@ -1,6 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 
-import { SmellprofileListComponent } from "../smellprofile-list/smellprofile-list.component";
+import {
+  SmellprofileListComponent
+} from "../smellprofile-list/smellprofile-list.component";
 
 @Component({
   selector: 'app-smellprofile-gallery',
@@ -8,21 +14,21 @@ import { SmellprofileListComponent } from "../smellprofile-list/smellprofile-lis
   styleUrls: ['./smellprofile-gallery.component.css']
 })
 export class SmellprofileGalleryComponent implements OnInit {
-  @ViewChild(SmellprofileListComponent ) child: SmellprofileListComponent; 
+  @ViewChild(SmellprofileListComponent) child: SmellprofileListComponent;
   viewState: String = 'Map';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  // Change view state back to map after creating a new smell
   updateSmells() {
     this.child.getSmells();
     this.changeViewState('Map');
   }
 
+  // Set view state as either: 'Map', 'List', or 'Create'
   changeViewState(newState): void {
     this.viewState = newState;
   }
-
 }

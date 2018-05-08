@@ -32,10 +32,12 @@ export class SmellprofileNewComponent implements OnInit {
 
   ngOnInit() {}
 
+  // Load map after DOM renders
   ngAfterViewInit() {
     this.refreshMap();
   }
 
+  // Use data service to create new smell
   createSmell(newSmellForm): void {
     let data: any = {
       name: this.newSmell.name,
@@ -53,6 +55,7 @@ export class SmellprofileNewComponent implements OnInit {
       });
   }
 
+  // Create/refresh the map
   refreshMap(): void {
     console.log("INIT!");
     // Rough center point for Richmond, VA
@@ -81,7 +84,6 @@ export class SmellprofileNewComponent implements OnInit {
           lng: this.newSmell.long
         },
         map: this.map
-        // title: this.newSmell.desc
       });
   
       this.map.setCenter({
@@ -89,22 +91,9 @@ export class SmellprofileNewComponent implements OnInit {
         lng: this.newSmell.long
       });
     });
-
-    // let marker = new google.maps.Marker({
-    //   position: {
-    //     lat: this.smellprofile.lat,
-    //     lng: this.smellprofile.long
-    //   },
-    //   map: this.map,
-    //   title: this.smellprofile.desc
-    // });
-
-    // this.map.setCenter({
-    //   lat: this.smellprofile.lat,
-    //   lng: this.smellprofile.long
-    // });
   }
 
+  // Map click event for setting lat/long for input
   mapClick(event): any {
     this.newSmell.lat = event.latLng.lat();
     this.newSmell.long = event.latLng.lng();
@@ -114,7 +103,6 @@ export class SmellprofileNewComponent implements OnInit {
         lng: this.newSmell.long
       },
       map: this.map
-      // title: this.newSmell.desc
     });
 
     this.map.setCenter({
@@ -123,7 +111,5 @@ export class SmellprofileNewComponent implements OnInit {
     });
 
     console.log(this.newSmell.lat, this.newSmell.long);
-
   }
-
 }

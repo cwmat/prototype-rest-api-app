@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  apiurl: 'http://67.205.177.107:8086/api/smellmap/'
 };
+
