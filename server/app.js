@@ -35,8 +35,9 @@ app.use(session({cookie: { maxAge: 60000 }}));
 app.use(flash());
 
 // Static assets
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public/data')));
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public/data')));
+app.use(express.static('../client/dist'));
 
 // Routes
 app.use('/', express.static('../client/dist'));
