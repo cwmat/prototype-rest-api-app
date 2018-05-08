@@ -52,21 +52,21 @@ export class SmellprofileUpdateComponent implements OnInit {
     this.smellprofileService.getSmell(param)
       .subscribe(smellprofile => {
         this.smellprofile = smellprofile[0];
+        // this.updateProfile = this.smellprofile;
       });
   }
 
   // Use data service to update entry
   updateSmell(form: any): void {
-    // console.log(data);
-    this.updateProfile.name = this.smellprofile.name;
-    this.updateProfile.type = this.smellprofile.type;
-    this.updateProfile.desc = this.smellprofile.desc;
-    this.updateProfile.lat = this.smellprofile.lat;
-    this.updateProfile.lon = this.smellprofile.long;
+    this.updateProfile.name = form.name;
+    this.updateProfile.type = form.type;
+    this.updateProfile.desc = form.desc;
+    this.updateProfile.lat = form.lat;
+    this.updateProfile.lon = form.lon;
     console.log(this.updateProfile);
     this.smellprofileService.updateSmell(this.smellprofile._id, this.updateProfile)
       .subscribe((result) => {
-        location.reload();
+        // location.reload();
       });
   }
 
