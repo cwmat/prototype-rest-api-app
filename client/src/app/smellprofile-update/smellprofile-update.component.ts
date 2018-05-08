@@ -52,7 +52,6 @@ export class SmellprofileUpdateComponent implements OnInit {
     this.smellprofileService.getSmell(param)
       .subscribe(smellprofile => {
         this.smellprofile = smellprofile[0];
-        // this.updateProfile = this.smellprofile;
       });
   }
 
@@ -66,7 +65,7 @@ export class SmellprofileUpdateComponent implements OnInit {
     console.log(this.updateProfile);
     this.smellprofileService.updateSmell(this.smellprofile._id, this.updateProfile)
       .subscribe((result) => {
-        // location.reload();
+        location.reload();
       });
   }
 
