@@ -41,6 +41,7 @@ app.use(express.static('../client/dist'));
 
 // Routes
 app.use('/', express.static('../client/dist'));
+app.use('/smell', express.static('../client/dist'));
 app.use('/api/smellmap', apismellmap);
 
 // Catch 404 and forward to error handler
