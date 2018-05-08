@@ -727,7 +727,6 @@ var SmellprofileUpdateComponent = /** @class */ (function () {
         this.smellprofileService.getSmell(param)
             .subscribe(function (smellprofile) {
             _this.smellprofile = smellprofile[0];
-            // this.updateProfile = this.smellprofile;
         });
     };
     // Use data service to update entry
@@ -740,7 +739,7 @@ var SmellprofileUpdateComponent = /** @class */ (function () {
         console.log(this.updateProfile);
         this.smellprofileService.updateSmell(this.smellprofile._id, this.updateProfile)
             .subscribe(function (result) {
-            // location.reload();
+            location.reload();
         });
     };
     // Draw/refresh the map
